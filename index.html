@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Master</title>
+    <title>Math Master Game</title>
     <style>
         * {
             margin: 0;
@@ -23,7 +24,7 @@
         .container {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             padding: 40px;
             text-align: center;
             max-width: 500px;
@@ -32,8 +33,15 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .screen {
@@ -48,7 +56,7 @@
             color: #5a67d8;
             font-size: 2.5em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .subtitle {
@@ -67,12 +75,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         button:active {
@@ -88,7 +96,7 @@
             font-weight: bold;
             margin-bottom: 20px;
             display: inline-block;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .question {
@@ -99,7 +107,7 @@
             font-size: 2em;
             margin: 20px 0;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .answer-input {
@@ -146,7 +154,7 @@
             color: white;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .stat-number {
@@ -156,47 +164,162 @@
         }
 
         .bonus-indicator {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             background: #00b894;
             color: white;
-            padding: 5px 15px;
+            padding: 8px 20px;
             border-radius: 20px;
             font-weight: bold;
             animation: bounce 0.5s ease-out;
             display: none;
+            margin: 10px 0;
+            font-size: 1.1em;
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         .game-screen {
             position: relative;
         }
+
+        .difficulty-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .difficulty-btn {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+            padding: 15px 10px;
+            font-size: 1em;
+            border-radius: 15px;
+        }
+
+        .difficulty-btn:hover {
+            background: linear-gradient(45deg, #0984e3, #74b9ff);
+        }
+
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 250px;
+            margin: 20px auto;
+        }
+
+        .numpad button {
+            background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+            padding: 15px;
+            font-size: 1.5em;
+            border-radius: 10px;
+            min-height: 60px;
+            font-weight: bold;
+        }
+
+        .numpad button:hover {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+        }
+
+        .numpad .zero {
+            grid-column: span 2;
+        }
+
+        .numpad .enter {
+            grid-column: span 3;
+            background: linear-gradient(45deg, #00b894, #00a085);
+            font-size: 1.2em;
+        }
+
+        .numpad .enter:hover {
+            background: linear-gradient(45deg, #00a085, #00b894);
+        }
+
+        .numpad .clear {
+            background: linear-gradient(45deg, #e17055, #d63031);
+        }
+
+        .numpad .clear:hover {
+            background: linear-gradient(45deg, #d63031, #e17055);
+        }
+
+        .answer-display {
+            background: #f8f9fa;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.8em;
+            text-align: center;
+            margin: 15px 0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #2d3436;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="bonus-indicator" id="bonusIndicator"></div>
-        
         <!-- Home Screen -->
         <div class="screen active" id="homeScreen">
             <h1>🧮 Math Master</h1>
-            <p class="subtitle">Practice addition, subtraction, multiplication & division!</p>
-            <button onclick="startGame()">🚀 Start Game</button>
+            <p class="subtitle">Choose your difficulty level!</p>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" onclick="startGame('easy')">
+                    🌟 Easy<br>
+                    <small>Single digits</small>
+                </button>
+                <button class="difficulty-btn" onclick="startGame('medium')">
+                    🎯 Medium<br>
+                    <small>Double digits</small>
+                </button>
+                <button class="difficulty-btn" onclick="startGame('hard')">
+                    🚀 Hard<br>
+                    <small>Big numbers</small>
+                </button>
+            </div>
         </div>
 
         <!-- Game Screen -->
         <div class="screen game-screen" id="gameScreen">
             <div class="timer" id="timer">60s</div>
+            <div class="bonus-indicator" id="bonusIndicator"></div>
             <div class="question" id="question">2 + 3 = ?</div>
-            <input type="number" class="answer-input" id="answerInput" placeholder="Your answer">
-            <br>
-            <button onclick="submitAnswer()">Submit Answer</button>
+            <div class="answer-display" id="answerDisplay">0</div>
+
+            <div class="numpad">
+                <button onclick="addDigit('7')">7</button>
+                <button onclick="addDigit('8')">8</button>
+                <button onclick="addDigit('9')">9</button>
+                <button onclick="addDigit('4')">4</button>
+                <button onclick="addDigit('5')">5</button>
+                <button onclick="addDigit('6')">6</button>
+                <button onclick="addDigit('1')">1</button>
+                <button onclick="addDigit('2')">2</button>
+                <button onclick="addDigit('3')">3</button>
+                <button onclick="addDigit('0')" class="zero">0</button>
+                <button onclick="clearAnswer()" class="clear">Clear</button>
+                <button onclick="submitAnswer()" class="enter">✓ Enter</button>
+            </div>
             <div class="feedback" id="feedback"></div>
         </div>
 
@@ -236,7 +359,9 @@
             currentAnswer: null,
             questionStartTime: null,
             responseTimes: [],
-            gameTimer: null
+            gameTimer: null,
+            difficulty: 'medium',
+            userInput: '0'
         };
 
         function showScreen(screenId) {
@@ -249,34 +374,88 @@
         function generateQuestion() {
             const operations = ['+', '-', '*', '/'];
             const operation = operations[Math.floor(Math.random() * operations.length)];
-            
+
             let num1, num2, answer;
-            
-            switch(operation) {
-                case '+':
-                    num1 = Math.floor(Math.random() * 50) + 1;
-                    num2 = Math.floor(Math.random() * 50) + 1;
-                    answer = num1 + num2;
+
+            switch (gameState.difficulty) {
+                case 'easy':
+                    switch (operation) {
+                        case '+':
+                            num1 = Math.floor(Math.random() * 9) + 1;
+                            num2 = Math.floor(Math.random() * 9) + 1;
+                            answer = num1 + num2;
+                            break;
+                        case '-':
+                            num1 = Math.floor(Math.random() * 19) + 2;
+                            num2 = Math.floor(Math.random() * num1) + 1;
+                            answer = num1 - num2;
+                            break;
+                        case '*':
+                            num1 = Math.floor(Math.random() * 9) + 1;
+                            num2 = Math.floor(Math.random() * 9) + 1;
+                            answer = num1 * num2;
+                            break;
+                        case '/':
+                            answer = Math.floor(Math.random() * 9) + 1;
+                            num2 = Math.floor(Math.random() * 9) + 1;
+                            num1 = answer * num2;
+                            break;
+                    }
                     break;
-                case '-':
-                    num1 = Math.floor(Math.random() * 50) + 20;
-                    num2 = Math.floor(Math.random() * num1) + 1;
-                    answer = num1 - num2;
+
+                case 'medium':
+                    switch (operation) {
+                        case '+':
+                            num1 = Math.floor(Math.random() * 50) + 1;
+                            num2 = Math.floor(Math.random() * 50) + 1;
+                            answer = num1 + num2;
+                            break;
+                        case '-':
+                            num1 = Math.floor(Math.random() * 50) + 20;
+                            num2 = Math.floor(Math.random() * num1) + 1;
+                            answer = num1 - num2;
+                            break;
+                        case '*':
+                            num1 = Math.floor(Math.random() * 12) + 1;
+                            num2 = Math.floor(Math.random() * 12) + 1;
+                            answer = num1 * num2;
+                            break;
+                        case '/':
+                            answer = Math.floor(Math.random() * 12) + 1;
+                            num2 = Math.floor(Math.random() * 12) + 1;
+                            num1 = answer * num2;
+                            break;
+                    }
                     break;
-                case '*':
-                    num1 = Math.floor(Math.random() * 12) + 1;
-                    num2 = Math.floor(Math.random() * 12) + 1;
-                    answer = num1 * num2;
-                    break;
-                case '/':
-                    answer = Math.floor(Math.random() * 12) + 1;
-                    num2 = Math.floor(Math.random() * 12) + 1;
-                    num1 = answer * num2;
+
+                case 'hard':
+                    switch (operation) {
+                        case '+':
+                            num1 = Math.floor(Math.random() * 500) + 100;
+                            num2 = Math.floor(Math.random() * 500) + 100;
+                            answer = num1 + num2;
+                            break;
+                        case '-':
+                            num1 = Math.floor(Math.random() * 500) + 200;
+                            num2 = Math.floor(Math.random() * num1) + 1;
+                            answer = num1 - num2;
+                            break;
+                        case '*':
+                            num1 = Math.floor(Math.random() * 25) + 5;
+                            num2 = Math.floor(Math.random() * 25) + 5;
+                            answer = num1 * num2;
+                            break;
+                        case '/':
+                            answer = Math.floor(Math.random() * 50) + 10;
+                            num2 = Math.floor(Math.random() * 20) + 2;
+                            num1 = answer * num2;
+                            break;
+                    }
                     break;
             }
-            
+
             return {
-                question: `${num1} ${operation} ${num2} = ?`,
+                question: `${num1} ${operation === '/' ? '÷' : (operation === '*' ? '×' : operation)} ${num2} = ?`,
                 answer: answer
             };
         }
@@ -286,27 +465,27 @@
             gameState.currentQuestion = questionData.question;
             gameState.currentAnswer = questionData.answer;
             gameState.questionStartTime = Date.now();
-            
+            gameState.userInput = '0';
+
             document.getElementById('question').textContent = questionData.question;
-            document.getElementById('answerInput').value = '';
+            document.getElementById('answerDisplay').textContent = '0';
             document.getElementById('feedback').textContent = '';
-            document.getElementById('answerInput').focus();
         }
 
         function updateTimer() {
             const timerElement = document.getElementById('timer');
             timerElement.textContent = gameState.timeLeft + 's';
-            
+
             if (gameState.timeLeft <= 10) {
                 timerElement.style.background = 'linear-gradient(45deg, #e74c3c, #c0392b)';
                 timerElement.style.animation = 'bounce 1s infinite';
             }
-            
+
             if (gameState.timeLeft <= 0) {
                 endGame();
                 return;
             }
-            
+
             gameState.timeLeft--;
         }
 
@@ -315,25 +494,27 @@
             bonusIndicator.textContent = `+${seconds}s ${message}`;
             bonusIndicator.style.display = 'block';
             bonusIndicator.style.animation = 'bounce 0.5s ease-out';
-            
+
             setTimeout(() => {
                 bonusIndicator.style.display = 'none';
             }, 1500);
         }
 
         function submitAnswer() {
-            const userAnswer = parseInt(document.getElementById('answerInput').value);
+            const userAnswer = parseInt(gameState.userInput);
+            if (isNaN(userAnswer)) return;
+
             const responseTime = (Date.now() - gameState.questionStartTime) / 1000;
             const feedbackElement = document.getElementById('feedback');
-            
+
             gameState.totalQuestions++;
             gameState.responseTimes.push(responseTime);
-            
+
             if (userAnswer === gameState.currentAnswer) {
                 gameState.correctAnswers++;
                 feedbackElement.textContent = '✅ Correct!';
                 feedbackElement.className = 'feedback correct';
-                
+
                 // Add bonus time based on response speed
                 if (responseTime < 2) {
                     gameState.timeLeft += 3;
@@ -350,14 +531,14 @@
                 feedbackElement.className = 'feedback incorrect';
                 gameState.timeLeft -= 2;
             }
-            
+
             // Show next question after a brief delay
             setTimeout(() => {
                 displayQuestion();
             }, 1500);
         }
 
-        function startGame() {
+        function startGame(difficulty = 'medium') {
             gameState = {
                 timeLeft: 60,
                 correctAnswers: 0,
@@ -366,42 +547,52 @@
                 currentAnswer: null,
                 questionStartTime: null,
                 responseTimes: [],
-                gameTimer: null
+                gameTimer: null,
+                difficulty: difficulty,
+                userInput: '0'
             };
-            
+
             showScreen('gameScreen');
             displayQuestion();
-            
+
             gameState.gameTimer = setInterval(updateTimer, 1000);
         }
 
         function endGame() {
             clearInterval(gameState.gameTimer);
-            
-            const accuracy = gameState.totalQuestions > 0 ? 
+
+            const accuracy = gameState.totalQuestions > 0 ?
                 Math.round((gameState.correctAnswers / gameState.totalQuestions) * 100) : 0;
-            
-            const avgTime = gameState.responseTimes.length > 0 ? 
+
+            const avgTime = gameState.responseTimes.length > 0 ?
                 (gameState.responseTimes.reduce((a, b) => a + b, 0) / gameState.responseTimes.length).toFixed(1) : 0;
-            
+
             document.getElementById('correctCount').textContent = gameState.correctAnswers;
             document.getElementById('totalQuestions').textContent = gameState.totalQuestions;
             document.getElementById('accuracy').textContent = accuracy + '%';
             document.getElementById('avgTime').textContent = avgTime + 's';
-            
+
             showScreen('summaryScreen');
         }
 
         function goHome() {
             showScreen('homeScreen');
         }
+        function addDigit(digit) { if (gameState.userInput === '0') { gameState.userInput = digit; } else if (gameState.userInput.length < 6) { gameState.userInput += digit; } document.getElementById('answerDisplay').textContent = gameState.userInput; } function clearAnswer() { gameState.userInput = '0'; document.getElementById('answerDisplay').textContent = '0'; }
 
-        // Allow Enter key to submit answer
-        document.getElementById('answerInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                submitAnswer();
+        // Keyboard support for numpad
+        document.addEventListener('keydown', function (e) {
+            if (document.getElementById('gameScreen').classList.contains('active')) {
+                if (e.key >= '0' && e.key <= '9') {
+                    addDigit(e.key);
+                } else if (e.key === 'Enter') {
+                    submitAnswer();
+                } else if (e.key === 'Backspace' || e.key === 'Delete') {
+                    clearAnswer();
+                }
             }
         });
     </script>
 </body>
+
 </html>
